@@ -1,0 +1,68 @@
+/* 
+    Document   : utils
+    Created on : 04/02/2011, 22:48:39
+    Author     : Cleison Ferreira
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/* 
+   TODO customize this sample style
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+@media screen, print, projection{
+    input[type='text'], textarea, input[type='password']{
+        border: 1px solid black;
+        background-color: palegoldenrod;
+        padding: 3px;
+    }
+    input[type='text']:focus, textarea:focus, input[type='password']:focus{
+        background-color: white;
+    }
+    input[type='button']{
+        border: 1px solid black;
+        padding: 3px;
+        width: 150px;
+        background-color: white;
+    }
+    input[type='button']:hover{
+        border: 1px solid red;
+        color: red;
+        cursor: pointer;
+    }
+    a{
+        color: blue;
+        letter-spacing: 1px;
+    }
+    a:hover{
+        text-decoration: underline;
+    }
+    p{
+        text-align: justify;
+        text-indent: 50px;
+        width: 98.5%;
+    }
+    div#rolltipDiv
+    {
+        font-size: 11px;
+        font-family: Verdana, Arial, Helvetica, sans-serif;
+        background-color: White;
+        visibility: hidden;
+        padding: 5px;
+        position: absolute;
+        z-index: 1000;
+        width: 150px;
+        overflow: visible;
+        border: solid 1px black;
+    }
+    div.navauxiliar
+    {
+        color: black;
+        font-size: 11px;
+        font-family: Verdana, Arial, Helvetica, sans-serif;
+        font-style: normal;
+        font-weight: normal;
+        margin-top: 3%
+    }
+}
+

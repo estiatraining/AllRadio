@@ -1,0 +1,97 @@
+<?php
+/*
+ * Página inicial da template do site cleison.ferreria
+ * Data construção: 02/03/2011
+ * autor: cleison ferreira de melo
+ */
+ini_set("display_errors", "on");
+include 'TIForteFramework/TIFF.php';
+$Utilitarios = new Utilitarios();
+$search = $_REQUEST['enviado'];
+if ($search == 'yes') {
+    $link = file($_REQUEST['endereco']);
+    $aux = '';
+    $vetor = null;
+    foreach ($link as $_linhas => $_frase) {
+        $_frase = str_replace("'", "&quot;", strtolower(htmlspecialchars($_frase)));
+        if (preg_match("/&lt;param/", $_frase)) {
+            if (preg_match("/filename/", $_frase)) {
+                $vetor = explode('value=&quot;', $_frase);
+                $vetor = explode('&quot;', $vetor[1]);
+                $aux = $vetor[0];
+                break;
+            }
+        }
+    }
+    foreach ($_SERVER as $key => $value) {
+        //echo $key . " = > " . $value . "<br />";
+    }
+    //echo exec("/sbin/ifconfig -a | grep 'inet addr:".$aux."' | awk -F\: '{print $2}' | awk '{print $1}'") . "\n";
+}
+?>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+    <head>
+        <title> ♫ ♫ ♫ AllRadio ♫ ♫ ♫ </title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="shortcut icon" href="template/IMG/AllRadioFlaviconIco.ico" />
+        <link rel="stylesheet" href="template/CSS/utils/utils.css" type="text/css" />
+        <link rel="stylesheet" href="template/CSS/template/index.css" type="text/css" />
+        <script type="text/javascript" src="template/JScript/utils/jquery.js" ></script>
+        <script type="text/javascript" src="template/JScript/utils/dw_misc.js" ></script>
+        <script type="text/javascript" src="template/JScript/utils/dw_rolltip.js" ></script>
+        <script type="text/javascript" src="template/JScript/utils/dw_viewport.js" ></script>
+        <script type="text/javascript" src="template/JScript/utils/utils.js" ></script>
+        <script type="text/javascript" src="template/JScript/template/index.js" ></script>
+    </head>
+    <body>
+        <div id="frame">
+            <div id="top">
+                <div id="lineTopo"></div>
+                <div id="logo" >
+                    <h1> ♫ ♫ ♫ AllRadio ♫ ♫ ♫ </h1>
+                </div>
+            </div>
+            <div id="body">
+                <div id="left">
+                    <div id="news"></div>
+                </div>
+                <div id="center">
+                    <form name="formulario" action="index.phtml" method="post" >
+                        <input type="hidden" name="enviado" id="enviado" />
+                        <label>
+                            <input type="text" name="endereco" id="endereco" value="http://www.radiosbr.com.br/player.html?id=1258" class="endereco" />
+                        </label>
+                        <label>
+                            <input type="button" name="buscar" id="buscar" value="BUSCAR" onclick="search();" class="endereco" />
+                        </label>
+                        <div id="player" style="display: none;">
+                            <object id="wmp" codebase="http://activex.microsoft.com/activex/controls/mplayer/en/nsmp2inf.cab#Version=6,4,7,1112" height="50" standby="Loading Microsoft Windows Media Player components..." width="328" align="middle" classid="CLSID:22d6f312-b0f6-11d0-94ab-0080c74c7e95" viewastext="viewastext" >
+                                <param name="FileName" id="filename" value="<?php echo $aux; ?>" />
+                                <param name="ShowControls" value="1" />
+                                <param name="showdisplay" value="0" />
+                                <param name="ShowStatusBar" value="1" />
+                                <param name="AutoSize" value="0" />
+                                <param name="AutoStart" id="autostart" value="1" />
+                                <param name="AnimationAtStart" value="1" />
+                                <param name="CurrentPosition" value="" />
+                                <embed id="wmp2" src="<?php echo $aux; ?>" width="328" height="50" autostart="1" align="middle" type="application/x-mplayer2" pluginspage="http://www.microsoft.com/Windows/Downloads/Contents/Products/MediaPlayer/" showcontrols="1" showdisplay="0" showstatusbar="1" autosize="0" displaybackcolor="black" animationatstart="1" volume="0" ></embed>
+                            </object>
+                        </div>
+                    </form>
+                </div>
+                <div id="right">
+                    <div id="autentic"></div>
+                </div>
+            </div>
+            <div id="footer">
+
+            </div>
+        </div>
+        <?php
+        if ($search == 'yes') {
+            echo '<script>player("' . $aux . '");</script>';
+        }
+        ?>
+    </body>
+</html>
